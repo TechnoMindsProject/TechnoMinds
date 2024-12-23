@@ -6,7 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
+from django.contrib.auth.hashers import make_password
 
 class Application(models.Model):
     application_id = models.AutoField(primary_key=True)
@@ -36,7 +36,7 @@ class Company(models.Model):
     manager_surname = models.CharField(max_length=255)
     manager_name = models.CharField(max_length=255)
     phone_number = models.CharField(unique=True, max_length=50)
-    email = models.CharField(unique=True, max_length=255)
+    email = models.EmailField(unique=True, max_length=255)
     website = models.CharField(unique=True, max_length=255)
     address = models.CharField(max_length=255)
     company_authorization = models.ForeignKey('CompanyAuthorization', models.DO_NOTHING)
@@ -46,14 +46,21 @@ class Company(models.Model):
         db_table = 'company'
 
 
+
 class CompanyAuthorization(models.Model):
     company_authorization_id = models.AutoField(primary_key=True)
     login = models.CharField(unique=True, max_length=255)
-    password_hash = models.CharField(unique=True, max_length=64)
+    password_hash = models.CharField(unique=True, max_length=255)
 
     class Meta:
         managed = False
         db_table = 'company_authorization'
+
+
+    def save(self, *args, **kwargs):
+        if not self.password_hash.startswith('pbkdf2_sha256$'):
+            self.password_hash = make_password(self.password_hash)  
+        super().save(*args, **kwargs)
 
 
 class CompanyEmployee(models.Model):
@@ -121,11 +128,16 @@ class Education(models.Model):
 class EmployeeAuthorization(models.Model):
     employee_authorization_id = models.AutoField(primary_key=True)
     login = models.CharField(unique=True, max_length=255)
-    password_hash = models.CharField(unique=True, max_length=64)
+    password_hash = models.CharField(unique=True, max_length=255)
 
     class Meta:
         managed = False
         db_table = 'employee_authorization'
+
+    def save(self, *args, **kwargs):
+        if not self.password_hash.startswith('pbkdf2_sha256$'):
+            self.password_hash = make_password(self.password_hash)  
+        super().save(*args, **kwargs)
 
 
 class EmployeeRequests(models.Model):
@@ -156,7 +168,7 @@ class JobExperience(models.Model):
 class Resume(models.Model):
     resume_id = models.AutoField(primary_key=True)
     user = models.ForeignKey('User', models.DO_NOTHING)
-    pdf_file = models.TextField()
+    pdf_file = models.FileField()
     created_at = models.DateTimeField()
 
     class Meta:
@@ -171,7 +183,7 @@ class User(models.Model):
     gender = models.CharField(max_length=7)
     birthday_date = models.DateField()
     phone_number = models.CharField(unique=True, max_length=50)
-    email = models.CharField(unique=True, max_length=255)
+    email = models.EmailField(unique=True, max_length=255)
     address = models.CharField(max_length=255)
     created_at = models.DateTimeField()
     user_authorization = models.ForeignKey('UserAuthorization', models.DO_NOTHING)
@@ -184,11 +196,16 @@ class User(models.Model):
 class UserAuthorization(models.Model):
     user_authorization_id = models.AutoField(primary_key=True)
     login = models.CharField(unique=True, max_length=255)
-    password_hash = models.CharField(unique=True, max_length=64)
+    password_hash = models.CharField(unique=True, max_length=255)
 
     class Meta:
         managed = False
         db_table = 'user_authorization'
+    
+    def save(self, *args, **kwargs):
+        if not self.password_hash.startswith('pbkdf2_sha256$'):
+            self.password_hash = make_password(self.password_hash)  
+        super().save(*args, **kwargs)
 
 
 class Vacancy(models.Model):
