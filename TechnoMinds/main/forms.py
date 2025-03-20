@@ -1,5 +1,5 @@
 from django import forms
-from .models import CompanyAuthorization, Company, CompanyEmployee, EmployeeAuthorization, EmployeeRequests, User, UserAuthorization
+from .models import CompanyAuthorization, Company, CompanyEmployee, EmployeeAuthorization, EmployeeRequests, User, UserAuthorization, Vacancy, JobExperience, Resume, Category, CompanyReview, DisabilityDescription, DisabilityGroup, Education, VacancyReview, CompanyReview, Application
 
 class CompanyAuthorizationForm(forms.ModelForm):
     class Meta:
@@ -35,3 +35,58 @@ class UserAuthorizationForm(forms.ModelForm):
     class Meta:
         model = UserAuthorization
         fields = ['login', 'password_hash']
+
+class VacancyForm(forms.ModelForm):
+    class Meta:
+        model = Vacancy
+        fields = ['company', 'category', 'name', 'description', 'requirements', 'salary', 'job_type', 'address', 'created_at']
+
+class JobExperienceForm(forms.ModelForm):
+    class Meta:
+        model = JobExperience
+        fields = ['user', 'company_name', 'position', 'start_date', 'end_date', 'description']
+
+class ResumeForm(forms.ModelForm):
+    class Meta:
+        model = Resume
+        fields = ['user', 'pdf_file', 'created_at']
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['category_name']
+
+class CompanyReviewForm(forms.ModelForm):
+    class Meta:
+        model = CompanyReview
+        fields = ['user', 'company', 'rating', 'message', 'submitted_at']
+
+class DisabilityDescriptionForm(forms.ModelForm):
+    class Meta:
+        model = DisabilityDescription
+        fields = ['disability_group', 'description', 'disability_certificate']
+
+class DisabilityGroupForm(forms.ModelForm):
+    class Meta:
+        model = DisabilityGroup
+        fields = ['user', 'disability_type']
+
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = ['user', 'institution_name', 'degree', 'field_of_study', 'start_day', 'end_date']
+
+class VacancyReviewForm(forms.ModelForm):
+    class Meta:
+        model = VacancyReview
+        fields = ['user', 'vacancy', 'rating', 'message', 'submitted_at']
+
+class VacancyReviewForm(forms.ModelForm):
+    class Meta:
+        model = VacancyReview
+        fields = ['user', 'vacancy', 'rating', 'message', 'submitted_at']
+
+class ApplicationForm(forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ['user', 'vacancy', 'resume', 'status', 'created_at']

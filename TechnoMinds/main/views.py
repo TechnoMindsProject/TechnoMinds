@@ -1,6 +1,10 @@
 from rest_framework import viewsets
-from .models import Application, Category, Company, CompanyAuthorization, CompanyEmployee, CompanyReview, DisabilityDescription, DisabilityGroup, Education, EmployeeAuthorization, EmployeeRequests, JobExperience, Resume, User, UserAuthorization, Vacancy, VacancyReview
+from .models import CompanyAuthorization, Company, CompanyEmployee, EmployeeAuthorization, EmployeeRequests, User, UserAuthorization, Vacancy, JobExperience, Resume, Category, CompanyReview, DisabilityDescription, DisabilityGroup, Education, VacancyReview, CompanyReview, Application
 from .serializers import ApplicationSerializer, CategorySerializer, CompanySerializer, CompanyAuthorizationSerializer, CompanyEmployeeSerializer, CompanyReviewSerializer, DisabilityDescriptionSerializer, DisabilityGroupSerializer, EducationSerializer, EmployeeAuthorizationSerializer, EmployeeRequestsSerializer, JobExperienceSerializer, ResumeSerializer, UserSerializer, UserAuthorizationSerializer, VacancySerializer, VacancyReviewSerializer
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
@@ -69,3 +73,25 @@ class VacancyViewSet(viewsets.ModelViewSet):
 class VacancyReviewViewSet(viewsets.ModelViewSet):
     queryset = VacancyReview.objects.all()
     serializer_class = VacancyReviewSerializer
+
+# class UserRegistrationView(APIView):
+#     def post(self, request, *args, **kwargs):
+#         serializer = UserRegistrationSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()  
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import UserRegistrationSerializer
+
+class UserRegistrationView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Створюємо серіалізатор для даних з запиту
+        serializer = UserRegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            # Якщо серіалізатор дійсний, зберігаємо нового користувача
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)  # Повертаємо успішний статус
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Якщо є помилки, повертаємо їх

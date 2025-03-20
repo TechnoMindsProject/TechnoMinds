@@ -20,5 +20,6 @@ router.register(r'users', UserViewSet)
 router.register(r'user_authorizations', UserAuthorizationViewSet)
 router.register(r'vacancies', VacancyViewSet)
 router.register(r'vacancy_reviews', VacancyReviewViewSet)
-
+router.register(r'register_user, )
+# path('register/', views.register_user, name='register_user'),# 
 urlpatterns = router.urls
