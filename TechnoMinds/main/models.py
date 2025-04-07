@@ -202,10 +202,10 @@ class UserAuthorization(models.Model):
         managed = False
         db_table = 'user_authorization'
     
-    def save(self, *args, **kwargs):
-        if not self.password_hash.startswith('pbkdf2_sha256$'):
-            self.password_hash = make_password(self.password_hash)  
-        super().save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+    #    if not self.password_hash.startswith('pbkdf2_sha256$'):
+    #        self.password_hash = make_password(self.password_hash)
+    #    super().save(*args, **kwargs)
 
 
 class Vacancy(models.Model):

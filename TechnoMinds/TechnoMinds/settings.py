@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website',  # залишено без змін, так як це ваша основна аплікація
+    'main',  # залишено без змін, так як це ваша основна аплікація
     'rest_framework',
     'corsheaders',
 ]
@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'tmbackend.urls'
+ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
@@ -63,7 +63,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'tmbackend.wsgi.application'  # змінено на правильну назву модуля
+WSGI_APPLICATION = 'TechnoMinds.wsgi.application'  # змінено на правильну назву модуля
 
 
 # Database
@@ -74,7 +74,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  
         'NAME': 'TechnoMinds',         
         'USER': 'root',           
-        'PASSWORD': '123123123',      
         'HOST': 'localhost',              
         'PORT': '3306',                       
     }
