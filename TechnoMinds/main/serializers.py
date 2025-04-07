@@ -85,3 +85,19 @@ class VacancyReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = VacancyReview
         fields = '__all__'
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)  # Вказуємо, що пароль пишеться тільки під час реєстрації
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']  # Потрібні для реєстрації поля
+
+    def create(self, validated_data):
+        # Створюємо нового користувача
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
