@@ -18,12 +18,12 @@ export default function Home() {
     <a href="#" className="text-mint-600 font-semibold border-b-4 border-[#1aae98]">
       Home
     </a>
-    <a href="#" className="text-gray-700 hover:text-gray-900">
-      About Us
-    </a>
-    <a href="#" className="text-gray-700 hover:text-gray-900">
-      Contacts
-    </a>
+    <Link href="/about_us" className="text-gray-700 hover:text-gray-900">
+            About Us
+          </Link>
+    <Link href="/contacts" className="text-gray-700 hover:text-gray-900">
+        Contacts
+      </Link>
 
     {/* Поле пошуку з лупою */}
     <div className="flex items-center border border-[#515d63] rounded-full px-4 py-2 text-sm bg-white shadow-sm w-64">

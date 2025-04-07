@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Search, UserCircle, ChevronUp, ChevronDown } from "lucide-react";
@@ -28,15 +29,25 @@ export default function FindCandidates() {
           <span className="text-2xl font-bold">INCLUWORK</span>
         </div>
 
-        <nav className="flex space-x-32 items-center">
-          <a href="#" className="text-black font-semibold border-b-4 border-[#1aae98]">Home</a>
-          <a href="#" className="text-black hover:text-gray-900">About Us</a>
-          <a href="#" className="text-black hover:text-gray-900">Contacts</a>
-        </nav>
+        <nav className="flex space-x-14 items-center">
+    <a href="#" className="text-mint-600 font-semibold border-b-4 border-[#1aae98]">
+      Home
+    </a>
+    <Link href="/about_us3" className="text-gray-700 hover:text-gray-900">
+            About Us
+          </Link>
+    <Link href="/contacts3" className="text-gray-700 hover:text-gray-900">
+        Contacts
+      </Link>
+      </nav>
 
-        <div className="flex space-x-6 items-center">
-          <UserCircle size={36} color="black" className="cursor-pointer hover:text-gray-700 transition duration-200" />
-        </div>
+      <div className="flex space-x-6 items-center">
+        <Link href="/profile">
+          <a className="cursor-pointer hover:text-gray-700 transition duration-200">
+            <UserCircle size={36} color="black" />
+          </a>
+        </Link>
+      </div>
       </header>
 
       {/* Зелена полоска з текстом та пошуком */}

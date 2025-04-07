@@ -1,5 +1,7 @@
 "use client";
 
+
+import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Search, UserCircle, ChevronUp, ChevronDown, FileText, Paperclip } from "lucide-react";
@@ -28,21 +30,30 @@ export default function FindCandidates() {
           <span className="text-2xl font-bold">INCLUWORK</span>
         </div>
 
-        <nav className="flex space-x-32 items-center">
-          <a href="#" className="text-black font-semibold border-b-4 border-[#1aae98]">Home</a>
-          <a href="#" className="text-black hover:text-gray-900">About Us</a>
-          <a href="#" className="text-black hover:text-gray-900">Contacts</a>
-        </nav>
+        <nav className="flex space-x-14 items-center">
+    <a href="#" className="text-mint-600 font-semibold border-b-4 border-[#1aae98]">
+      Home
+    </a>
+    <Link href="/about_us2" className="text-gray-700 hover:text-gray-900">
+            About Us
+          </Link>
+    <Link href="/contacts2" className="text-gray-700 hover:text-gray-900">
+        Contacts
+      </Link>
+      </nav>
 
-        <div className="flex space-x-6 items-center">
-          <UserCircle size={36} color="black" className="cursor-pointer hover:text-gray-700 transition duration-200" />
+      <div className="flex space-x-6 items-center">
+      <Link href="/profile" passHref>
+        <div className="cursor-pointer hover:text-gray-700 transition duration-200">
+          <UserCircle size={36} color="black" />
         </div>
+      </Link>
+    </div>
       </header>
 
       {/* Зелена полоска */}
       <div className="relative w-full h-[80vh] flex flex-col justify-start px-16 pt-16 bg-gradient-to-r from-[#407469] to-[#595757] text-white">
         <div className="absolute top-6 right-10 flex space-x-12">
-          <a href="#" className="text-white font-bold text-lg underline">Post a resume</a>
         </div>
 
         <h1 className="text-5xl font-bold mb-6 w-full max-w-4xl">Find a job</h1>
