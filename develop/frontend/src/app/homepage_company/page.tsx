@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Search, UserCircle, ChevronUp, ChevronDown } from "lucide-react";
 
 export default function FindCandidates() {
@@ -9,7 +10,7 @@ export default function FindCandidates() {
 
   return (
     <div className="min-h-screen bg-[#dcdbdb] font-sans relative">
-      {/* Фонове зображення (посунуте ще нижче) */}
+      {/* Фонове зображення */}
       <div className="absolute inset-x-0 top-[50vh] bottom-0">
         <Image
           src="/working.png"
@@ -29,20 +30,24 @@ export default function FindCandidates() {
         </div>
 
         <nav className="flex space-x-32 items-center">
-          <a href="#" className="text-black font-semibold border-b-4 border-[#1aae98]">Home</a>
-          <a href="#" className="text-black hover:text-gray-900">About Us</a>
-          <a href="#" className="text-black hover:text-gray-900">Contacts</a>
+          <Link href="/homepage_company" className="text-black font-semibold border-b-4 border-[#1aae98]">Home</Link>
+          <Link href="/about_us3" className="text-black hover:text-gray-900">About Us</Link>
+          <Link href="/contacts3" className="text-black hover:text-gray-900">Contacts</Link>
         </nav>
 
         <div className="flex space-x-6 items-center">
-          <UserCircle size={36} color="black" className="cursor-pointer hover:text-gray-700 transition duration-200" />
+          <Link href="/profile_employer">
+            <UserCircle size={36} color="black" className="cursor-pointer hover:text-gray-700 transition duration-200" />
+          </Link>
         </div>
       </header>
 
-      {/* Зелена полоска з текстом та пошуком */}
+      {/* Пошуковий блок */}
       <div className="relative w-full h-[40vh] flex flex-col justify-start px-16 pt-16 bg-gradient-to-r from-[#407469] to-[#595757] text-white">
         <div className="absolute top-6 right-10">
-          <a href="#" className="text-white font-bold text-lg underline">Post a job</a>
+          <Link href="/create_vacancy" className="text-white font-bold text-lg underline">
+            Post a job
+          </Link>
         </div>
 
         <h1 className="text-5xl font-bold mb-6 w-full max-w-4xl">Find candidates</h1>
@@ -51,7 +56,7 @@ export default function FindCandidates() {
           <br /> You have candidates to choose from.
         </p>
 
-        {/* Пошукове поле опущене ще нижче */}
+        {/* Пошукове поле */}
         <div className="absolute top-[70%] left-1/2 transform -translate-x-1/2 flex items-center bg-white rounded-full shadow-md">
           <input
             type="text"
@@ -70,10 +75,11 @@ export default function FindCandidates() {
         </div>
       </div>
 
-      {/* Candidates by category Section */}
+      {/* Candidates by category */}
       <section className="relative w-full px-16 py-10">
         <div className="relative">
-          <h2 className="text-3xl font-bold text-black mb-6">Candidates by category</h2>{isContentVisible && (
+          <h2 className="text-3xl font-bold text-black mb-6">Candidates by category</h2>
+          {isContentVisible && (
             <div className="grid grid-cols-3 gap-16 text-black">
               <div className="space-y-6">
                 <p>Accounting & auditing</p>
